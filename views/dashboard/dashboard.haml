@@ -1,0 +1,19 @@
+.row
+  #my-standup.span7
+    %h4== Standup for #{Date.today.to_s}
+    %form.row#new-standup{ :action => "/standups", :method => :post }
+      %label{ :for => :'standup-prev' } Prev
+      %textarea.span6#standup-previous{ :name => "standup[previous]" }
+      %label{ :for => :'standup-next' } Next
+      %textarea.span6#standup-next{ :name => "standup[previous]" }
+      %label{ :for => :'standup-blockers' } Blockers
+      %textarea.span6#standup-blockers{ :name => "standup[previous]" }
+      %input{ :type => :hidden, :name => "standup[date]" }
+
+      .actions.span6
+        %input.btn.btn-success{ :type => :submit, :value => "Create" }
+
+  #today-standups.span4
+    %h4 Today Standups
+    #no-standups.alert.alert-block.alert-info.center
+      %h4 There's no standups yet

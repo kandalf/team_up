@@ -1,0 +1,8 @@
+%nav.navbar.navbar-static-top
+  .navbar-inner
+    .container
+      %a.brand{ :href => "#" }
+        TeamUp
+      %ul.nav
+        %li{ :class => (req.path == '/profile') ? 'active' : '' }
+          = link_to '#', 'Profile'
