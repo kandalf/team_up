@@ -11,8 +11,21 @@
       %header
         = partial('shared/_nav_bar')
       #content.container
+        .row
+          - if flash.has_key?(:info)
+            .alert.alert-success= flash[:info]
+
+          - if flash.has_key?(:success)
+            .alert.alert-success= flash[:success]
+
+          - if flash.has_key?(:warning)
+            .alert.alert-warning= flash[:warning]
+
+          - if flash.has_key?(:error)
+            .alert.alert-success= flash[:error]
         = yield
 
     %footer
 
-    %script{ :src => "/javascripts/bootstrap.min.js", :type => "text/js" }
+    %script{ :src => "/javascripts/jquery-1.9.1.min.js", :type => "text/javascript" }
+    %script{ :src => "/javascripts/bootstrap.min.js", :type => "text/javascript" }
