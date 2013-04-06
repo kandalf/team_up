@@ -2,8 +2,10 @@ require 'cuba'
 require 'cuba/render'
 require 'rack/protection'
 require 'securerandom'
-require './lib/cuba_sass'
-require './helpers/view_helper'
+require './lib/team_up'
+require 'ohm'
+
+Ohm.connect(:url => 'redis://127.0.01:6379/team_up_dev')
 
 Cuba.settings[:sass] = {
   :style => :compact,
