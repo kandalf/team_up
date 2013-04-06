@@ -5,10 +5,10 @@
       %label{ :for => :'standup-prev' } Prev
       %textarea.span6#standup-previous{ :name => "standup[previous]" }
       %label{ :for => :'standup-next' } Next
-      %textarea.span6#standup-next{ :name => "standup[previous]" }
+      %textarea.span6#standup-next{ :name => "standup[next]" }
       %label{ :for => :'standup-blockers' } Blockers
-      %textarea.span6#standup-blockers{ :name => "standup[previous]" }
-      %input{ :type => :hidden, :name => "standup[date]" }
+      %textarea.span6#standup-blockers{ :name => "standup[blockers]" }
+      %input{ :type => :hidden, :name => "standup[date]", :value => Date.today.to_s }
 
       .actions.span6
         %input.btn.btn-success{ :type => :submit, :value => "Create" }

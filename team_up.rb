@@ -21,12 +21,15 @@ Cuba.plugin Cuba::Sass
 
 include Cuba::Render::Helper
 
+Dir["./routes/**/*.rb"].each{ |f| require f }
+Dir["./models/**/*.rb"].each{ |f| require f }
+
 Cuba.define do
   on get do
-    on root do
-      res.write render("./views/layouts/application.haml") {
-        render("views/dashboard/dashboard.haml")
-      }
-    end
+    run TeamUp::Dashboard
+  end
+
+  on "standups" do
+    run TeamUp::Standup
   end
 end
