@@ -6,7 +6,7 @@ module TeamUp
       end
 
       on "dashboard" do
-        @standups = ::Standup.all
+        @standups = ::Standup.all.sort(:order => "DESC")
         res.write render("./views/layouts/application.haml") {
           render("views/dashboard/dashboard.haml")
         }
