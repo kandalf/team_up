@@ -6,6 +6,7 @@ module TeamUp
       end
 
       on "dashboard" do
+        @standups = ::Standup.all
         res.write render("./views/layouts/application.haml") {
           render("views/dashboard/dashboard.haml")
         }

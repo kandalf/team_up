@@ -1,8 +1,8 @@
 .row
   #my-standup.span7
     %h4== Standup for #{Date.today.to_s}
-    %form.row#new-standup{ :action => "/standups", :method => :post }
-      %label{ :for => :'standup-prev' } Prev
+    %form#new-standup{ :action => "/standups", :method => :post }
+      %label{ :for => :'standup-prev' } Previous
       %textarea.span6#standup-previous{ :name => "standup[previous]" }
       %label{ :for => :'standup-next' } Next
       %textarea.span6#standup-next{ :name => "standup[next]" }
@@ -13,7 +13,24 @@
       .actions.span6
         %input.btn.btn-success{ :type => :submit, :value => "Create" }
 
-  #today-standups.span4
+  #today-standups.span5
     %h4 Today Standups
-    #no-standups.alert.alert-block.alert-info.center
-      %h4 There's no standups yet
+    - if @standups.empty?
+      #no-standups.alert.alert-block.alert-info.center
+        %h4 There's no standups yet
+    - else
+      - @standups.each do |std|
+        .standup
+          .title.row
+            .span3 kandalf
+            .span2= Date.parse(std.date).to_s
+          %ul.standup-elements.row
+            %li.span6
+              %label.span1 Previous
+              .span4= std.previous
+            %li.span6
+              %label.span1 Next
+              .span4= std.next
+            %li.span6
+              %label.span1 Blockers
+              .span4= std.blockers
