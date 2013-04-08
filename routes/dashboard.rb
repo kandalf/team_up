@@ -11,6 +11,12 @@ module TeamUp
           render("views/dashboard/dashboard.haml")
         }
       end
+
+      on "/sessions/create" do
+        puts "GET"
+        puts env
+        puts @env
+      end
     end
   end
 end

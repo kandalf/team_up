@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pry -e "ENV['RACK_ENV']=(ENV['RACK_ENV'] || 'development')" -r./team_up
