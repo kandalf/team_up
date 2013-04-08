@@ -1,4 +1,4 @@
-team_up
-=======
+TeamUp
+======
 
 Agile standups creation tool
