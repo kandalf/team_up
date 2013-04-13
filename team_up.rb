@@ -18,10 +18,17 @@ Cuba.settings[:render]= {:template_engine => :haml}
 
 Cuba.use Rack::Session::Cookie, :secret => SecureRandom.hex(64)
 Cuba.use Rack::Protection
+
+OmniAuth.config.on_failure = Proc.new { |env|
+  OmniAuth::FailureEndpoint.new(env).redirect_to_failure
+}
+
 Cuba.use OmniAuth::Builder do
-  provider :github, ENV['GITHUB_CLIENT_ID'], ENV['GITHUB_SECRET_ID'], :scope => "user,repo"
+  provider :github, ENV['GITHUB_CLIENT_ID'], ENV['GITHUB_CLIENT_SECRET'], :scope => "user,repo"
 end
 
+
+Cuba.plugin Shield::Helpers
 Cuba.plugin Cuba::Render
 Cuba.plugin Cuba::Sass
 
@@ -29,13 +36,31 @@ include Cuba::Render::Helper
 
 Dir["./routes/**/*.rb"].each{ |f| require f }
 Dir["./models/**/*.rb"].each{ |f| require f }
+Dir["./contexts/**/*.rb"].each{ |f| require f }
 
 Cuba.define do
   on get do
-    run TeamUp::Dashboard
-  end
+    on root do
+      res.write render("./views/layouts/application.haml") {
+        render("views/home/home.haml")
+      }
+    end
 
-  on "standups" do
-    run TeamUp::Standup
+    on authenticated(User) do
+      run TeamUp::Dashboard
+
+      on "standups" do
+        run TeamUp::Standup
+      end
+
+      on "dashboard" do
+        run TeamUp::Dashboard
+      end
+    end
+
+    on "auth" do
+      run TeamUp::Session
+    end
+
   end
 end
