@@ -3,6 +3,7 @@ require 'cuba/render'
 require 'rack/protection'
 require 'securerandom'
 require 'ohm'
+require 'shield'
 require 'omniauth-github'
 require './lib/team_up'
 
