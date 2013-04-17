@@ -1,6 +1,9 @@
+require 'pp'
+
 class SessionManager
-  def initialize(auth_hash)
+  def initialize(auth_hash, ctx)
     pp auth_hash
+    @ctx = ctx
     @info = auth_hash["info"]
     @uid = auth_hash["uid"]
     @extra = auth_hash["extra"]
@@ -11,9 +14,7 @@ class SessionManager
 
     @user = create_user if @user.nil?
 
-    require 'debugger'
-    debugger
-    Shield::Helpers.login(User, @user.github_user, @info["password"])
+    @ctx.login(User, @user.github_user, @info["password"])
   end
   
   private
@@ -27,7 +28,7 @@ class SessionManager
     )
 
     user.password = @info["password"]
-    user.save
+    user.save!
     user
   end
 end

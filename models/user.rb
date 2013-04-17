@@ -18,6 +18,6 @@ class User < Ohm::Model
   collection :standups, :Standup
 
   def self.fetch(github_user)
-    find(:github_user => github_user)
+    with(:github_user, github_user)
   end
 end
