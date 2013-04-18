@@ -27,10 +27,10 @@ Cuba.use OmniAuth::Builder do
   provider :github, ENV['GITHUB_CLIENT_ID'], ENV['GITHUB_CLIENT_SECRET'], :scope => "user,repo"
 end
 
-
 Cuba.plugin Shield::Helpers
 Cuba.plugin Cuba::Render
 Cuba.plugin Cuba::Sass
+Cuba.plugin TeamUp::Context
 
 include Cuba::Render::Helper
 
@@ -47,7 +47,7 @@ Cuba.define do
     end
 
     on authenticated(User) do
-      run TeamUp::Dashboard
+      #run TeamUp::Dashboard
 
       on "standups" do
         run TeamUp::Standup
