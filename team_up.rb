@@ -47,8 +47,6 @@ Cuba.define do
     end
 
     on authenticated(User) do
-      #run TeamUp::Dashboard
-
       on "standups" do
         run TeamUp::Standup
       end
