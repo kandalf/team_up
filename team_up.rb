@@ -16,7 +16,7 @@ Cuba.settings[:sass] = {
 
 Cuba.settings[:render]= {:template_engine => :haml}
 
-Cuba.use Rack::Session::Cookie, :key => "teamup.session", :secret => SecureRandom.hex(64)
+Cuba.use Rack::Session::Cookie, :key => 'teamup.session', :secret => '570e9854e1c8cd4ec5238ac66a2f574abc3e4da6809f1fc26248f825a09c693b'
 Cuba.use Rack::Protection
 
 OmniAuth.config.on_failure = Proc.new { |env|
