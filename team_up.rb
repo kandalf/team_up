@@ -50,6 +50,10 @@ Cuba.define do
   end
 
   on authenticated(User) do
+    on "logout" do
+      logout(User)
+      res.redirect "/"
+    end
     on "standups" do
       run TeamUp::Standup
     end

@@ -3,10 +3,12 @@
     .container
       %a.brand{ :href => "#" }
         TeamUp
-      %ul.nav
-        %li{ :class => (req.path == '/dashboard') ? 'active' : '' }
-          = link_to '/dashboard', 'Dashboard'
+      - if current_user
+        %ul.nav
+          %li{ :class => (req.path == '/dashboard') ? 'active' : '' }
+            = link_to '/dashboard', 'Dashboard'
 
-      .pull-right
-        .user
-          = current_user ? current_user.github_user : ''
+        .pull-right
+          .user
+            = current_user.github_user
+            %a.logout{ :href => "/logout" } Logout
