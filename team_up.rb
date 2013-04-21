@@ -39,26 +39,27 @@ Dir["./models/**/*.rb"].each{ |f| require f }
 Dir["./contexts/**/*.rb"].each{ |f| require f }
 
 Cuba.define do
-  on get do
-    on root do
+  on root do
+    if current_user
+      res.redirect '/dashboard'
+    else
       res.write render("./views/layouts/application.haml") {
         render("views/home/home.haml")
       }
     end
+  end
 
-    on authenticated(User) do
-      on "standups" do
-        run TeamUp::Standup
-      end
-
-      on "dashboard" do
-        run TeamUp::Dashboard
-      end
+  on authenticated(User) do
+    on "standups" do
+      run TeamUp::Standup
     end
 
-    on "auth" do
-      run TeamUp::Session
+    on "dashboard" do
+      run TeamUp::Dashboard
     end
+  end
 
+  on "auth" do
+    run TeamUp::Session
   end
 end

@@ -4,5 +4,9 @@
       %a.brand{ :href => "#" }
         TeamUp
       %ul.nav
-        %li{ :class => (req.path == '/profile') ? 'active' : '' }
-          = link_to '#', 'Profile'
+        %li{ :class => (req.path == '/dashboard') ? 'active' : '' }
+          = link_to '/dashboard', 'Dashboard'
+
+      .pull-right
+        .user
+          = current_user ? current_user.github_user : ''

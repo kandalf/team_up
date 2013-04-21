@@ -7,9 +7,6 @@ module TeamUp
         user = SessionManager.new(@env['omniauth.auth'], self).execute
 
         if user
-          puts "CURRENT"
-          pp current_user
-          pp session
           res.redirect "/dashboard"
         else
           session['flash.error'] = 'Unauthorized User'

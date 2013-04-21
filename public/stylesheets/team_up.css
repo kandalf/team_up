@@ -7,6 +7,7 @@ h2 { background-color: #707070; color: white; padding: 12px 16px; border-radius:
 body { background-color: #f7ffdf; color: #34362f; }
 
 nav { margin-bottom: 20px; }
+nav .user { padding: 10px; font-weight: bold; }
 
 #wrap { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -60px; }
 
