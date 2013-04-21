@@ -13,4 +13,16 @@ describe User do
     user = User.new
     user.must_respond_to :crypted_password
   end
+
+  it "should belong to an allowed organization to be allowed" do
+    ENV['TEAM_UP_ORGS'] = 'threefunkymonkeys'
+
+    user = User.new(:organizations => ['other'])
+
+    assert !user.allowed?
+
+    user = User.new(:organizations => ['threefunkymonkeys'])
+
+    assert user.allowed?
+  end
 end
