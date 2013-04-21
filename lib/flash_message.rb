@@ -13,7 +13,7 @@ class Cuba
   end
 
   def flash
-    @env['cuba.flash'] ||= (@env['rack.session']['flash'] || {})
-    @env['cuba.flash']
+    session['cuba.flash'] ||= (@env['rack.session']['cuba.flash'] || {})
+    session['cuba.flash']
   end
 end
