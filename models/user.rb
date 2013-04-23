@@ -17,7 +17,7 @@ class User < Ohm::Model
   index :github_user
   index :email
 
-  def initialize(attrs)
+  def initialize(attrs = {})
     super(attrs)
     self.organizations ||= ""
   end
