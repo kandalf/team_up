@@ -6,9 +6,10 @@ module TeamUp
       on ":provider/callback" do
         user = SessionManager.new(@env['omniauth.auth'], self).execute
 
-        if user
+        if user && current_user.allowed?
           res.redirect "/dashboard"
         else
+          logout(User) if user
           session['flash.error'] = 'Unauthorized User'
           res.redirect '/'
         end
