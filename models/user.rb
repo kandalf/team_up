@@ -9,6 +9,7 @@ class User < Ohm::Model
   attribute :crypted_password
   attribute :gravatar_url
   attribute :organizations
+  collection :standups, :Standup
 
   unique :github_user
   unique :email
@@ -16,11 +17,15 @@ class User < Ohm::Model
   index :github_user
   index :email
 
-  collection :standups, :Standup
+  def initialize(attrs)
+    super(attrs)
+    self.organizations ||= ""
+  end
 
   def self.fetch(github_user)
     with(:github_user, github_user)
   end
+
 
   def allowed?
     allowed_orgs = ENV['TEAM_UP_ORGS'].split(' ') || []

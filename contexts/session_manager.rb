@@ -1,4 +1,6 @@
 require 'pp'
+require 'rest_client'
+require 'json'
 
 class SessionManager
   def initialize(auth_hash, ctx)
@@ -15,8 +17,11 @@ class SessionManager
 
     @user = create_user if @user.nil?
 
+    set_organizations
+
     @ctx.login(User, @user.github_user, @info["password"])
   end
+
   
   private
   def create_user
@@ -30,5 +35,22 @@ class SessionManager
     user.password = @info["password"]
     user.save!
     user
+  end
+
+  def set_organizations
+    begin
+      response = RestClient.get(@extra["raw_info"]["organizations_url"])
+      orgs = JSON.parse(response)
+
+      orgs.each do |org|
+        unless @user.organizations.include? org["login"]
+          @user.organizations << org["login"]
+        end
+      end
+
+      @user.save
+    rescue
+      @user.organizations ||= ""
+    end
   end
 end

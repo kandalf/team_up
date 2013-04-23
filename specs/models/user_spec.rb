@@ -18,11 +18,9 @@ describe User do
     ENV['TEAM_UP_ORGS'] = 'threefunkymonkeys'
 
     user = User.new(:organizations => ['other'])
-
     assert !user.allowed?
 
     user = User.new(:organizations => ['threefunkymonkeys'])
-
     assert user.allowed?
   end
 end

@@ -7,4 +7,8 @@ gem 'rack-protection'
 gem 'ohm'
 gem 'shield'
 gem 'omniauth-github'
-gem 'debugger'
+gem 'rest-client'
+
+group :development, :test do
+  gem 'debugger'
+end
