@@ -23,4 +23,20 @@ describe User do
     user = User.new(:organizations => 'threefunkymonkeys')
     assert user.allowed?
   end
+
+  it "should not be allowed to standup twice in a day" do
+    user = User.create
+
+    attrs = { :previous => 'Prev',
+              :next     => 'Next',
+              :blockers => 'None',
+              :date     => Date.today.to_s,
+              :user_id  => user.id
+            }
+
+    assert user.can_standup?
+    Standup.create(attrs)
+
+    assert !user.can_standup?
+  end
 end

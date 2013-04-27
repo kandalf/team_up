@@ -8,6 +8,9 @@ class Standup < Ohm::Model
 
   reference :user, :User
 
+  index :user_id
+  index :date
+
   def validate
     assert_present :previous
     assert_present :next

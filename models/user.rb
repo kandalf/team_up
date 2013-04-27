@@ -33,4 +33,8 @@ class User < Ohm::Model
       allowed_orgs.include? org
     end
   end
+
+  def can_standup?
+    (Standup.find(:user_id => self.id, :date => Date.today.to_s).count == 0)
+  end
 end
