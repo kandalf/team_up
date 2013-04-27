@@ -25,7 +25,8 @@ describe User do
   end
 
   it "should not be allowed to standup twice in a day" do
-    user = User.create
+    user = User.create(:github_user => "unique",
+                       :email => "another@example.com")
 
     attrs = { :previous => 'Prev',
               :next     => 'Next',
