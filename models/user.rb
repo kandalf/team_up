@@ -26,7 +26,6 @@ class User < Ohm::Model
     with(:github_user, github_user)
   end
 
-
   def allowed?
     allowed_orgs = ENV['TEAM_UP_ORGS'].split(' ') || []
     self.organizations.split(" ").any? do |org|

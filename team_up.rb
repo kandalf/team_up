@@ -7,7 +7,7 @@ require 'shield'
 require 'omniauth-github'
 require './lib/team_up'
 
-Ohm.connect(:url => 'redis://127.0.01:6379/team_up_dev')
+Ohm.connect(:url => Settings::REDIS_URL)
 
 Cuba.settings[:sass] = {
   :style => :compact,

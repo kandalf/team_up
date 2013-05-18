@@ -1,8 +1,6 @@
 module TeamUp
  class Standup < Cuba
   define do
-    puts "On STANDUP"
-
     on post, param("standup") do |params|
       standup = StandupCreator.new(params, self).execute
       if standup.valid?
