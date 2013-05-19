@@ -3,15 +3,19 @@
     %h4== Standup for #{Date.today.to_s}
     %form#new-standup{ :action => "/standups", :method => :post }
       %label{ :for => :'standup-prev' } Previous
-      %textarea.span6#standup-previous{ :name => "standup[previous]" }
+      %textarea.span6#standup-previous{ :name => "standup[previous]", :readonly => !current_user.can_standup? }
+        = @my_standup.previous unless current_user.can_standup?
       %label{ :for => :'standup-next' } Next
-      %textarea.span6#standup-next{ :name => "standup[next]" }
+      %textarea.span6#standup-next{ :name => "standup[next]", :readonly => !current_user.can_standup? }
+        = @my_standup.next unless current_user.can_standup?
       %label{ :for => :'standup-blockers' } Blockers
-      %textarea.span6#standup-blockers{ :name => "standup[blockers]" }
+      %textarea.span6#standup-blockers{ :name => "standup[blockers]", :readonly => !current_user.can_standup? }
+        = @my_standup.blockers unless current_user.can_standup?
       %input{ :type => :hidden, :name => "standup[date]", :value => Date.today.to_s }
 
-      .actions.span6
-        %input.btn.btn-success{ :type => :submit, :value => "Create" }
+      - if current_user.can_standup?
+        .actions.span6
+          %input.btn.btn-success{ :type => :submit, :value => "Create" }
 
   #today-standups.span5
     %h4 Today Standups

@@ -34,6 +34,10 @@ class User < Ohm::Model
   end
 
   def can_standup?
-    (Standup.find(:user_id => self.id, :date => Date.today.to_s).count == 0)
+   !today_standup
+  end
+
+  def today_standup
+    Standup.find(:user_id => self.id, :date => Date.today.to_s).first
   end
 end
