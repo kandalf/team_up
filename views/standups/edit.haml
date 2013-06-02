@@ -1,0 +1,24 @@
+.row
+  .span7
+    %h4== Standup for #{standup.date}
+    
+    %form{ :action => "/standups/#{standup.id}", :method => :post }
+      %input{ :type => :hidden, :name => "_method", :value => "PUT" }
+      %label{ :for => :previous } Previous
+      %textarea#previous.span6{ :name => "standup[previous]", :readonly => !standup.editable? }
+        = standup.previous
+
+      %label{ :for => :next } Next
+      %textarea#next.span6{ :name => "standup[next]", :readonly => !standup.editable? }
+        = standup.next
+
+      %label{ :for => :blockers } Blockers
+      %textarea#blockers.span6{ :name => "standup[blockers]", :readonly => !standup.editable? }
+        = standup.blockers
+
+      .actions.span6
+        - if standup.editable?
+          %input.btn.btn-primary{ :type => :submit, :value => "Update" }
+        - else
+          .alert
+            %strong You can't edit this standup

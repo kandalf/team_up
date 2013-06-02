@@ -7,6 +7,8 @@
         %ul.nav
           %li{ :class => (req.path == '/dashboard') ? 'active' : '' }
             = link_to '/dashboard', 'Dashboard'
+          %li{ :class => (req.path == '/standups') ? 'active' : '' }
+            = link_to '/standups', 'Standups'
 
         .pull-right
           .user

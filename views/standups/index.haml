@@ -1,0 +1,11 @@
+%h4 Standups for Today
+%ul.standups
+  - for_today.each do |standup|
+    %li.entry
+      = partial("standups/_standup", {:standup => standup}) 
+
+%h4 Previous Standups
+%ul.standups
+  - previous.each do |standup|
+    %li.entry
+      = partial("standups/_standup", {:standup => standup}) 

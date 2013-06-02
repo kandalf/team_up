@@ -26,18 +26,5 @@
       #no-standups.alert.alert-block.alert-info.center
         %h4 There's no standups yet
     - else
-      - @standups.each do |std|
-        .standup
-          .title.row
-            .span3 kandalf
-            .span2= Date.parse(std.date).to_s
-          %ul.standup-elements.row
-            %li.span6
-              %label.span1 Previous
-              .span4= std.previous
-            %li.span6
-              %label.span1 Next
-              .span4= std.next
-            %li.span6
-              %label.span1 Blockers
-              .span4= std.blockers
+      - @standups.each do |standup|
+        = partial("standups/_standup", {:standup => standup})

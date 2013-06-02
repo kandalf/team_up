@@ -1,0 +1,14 @@
+.standup
+  .title.row
+    .span3= standup.user.github_user
+    .span2= Date.parse(standup.date).to_s
+  %ul.standup-elements.row
+    %li.span6
+      %label.span1 Previous
+      .span4= standup.previous
+    %li.span6
+      %label.span1 Next
+      .span4= standup.next
+    %li.span6
+      %label.span1 Blockers
+      .span4= standup.blockers

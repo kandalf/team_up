@@ -30,3 +30,5 @@ label { font-weight: bold; color: #414141; }
 .standup ul.standup-elements { list-style: none; margin: 0; padding: 0; }
 .standup ul.standup-elements li { margin: 0; padding: 0; left: 0; }
 .standup ul.standup-elements li label { margin-left: 0; }
+
+ul.standups { list-style: none; }
