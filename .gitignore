@@ -1,0 +1,5 @@
+.rvmrc
+.sass-cache
+/tmp
+tags
+start_server.sh
