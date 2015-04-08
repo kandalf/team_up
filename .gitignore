@@ -1,4 +1,5 @@
 .rvmrc
+.ruby-version
 .sass-cache
 /tmp
 tags
