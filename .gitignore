@@ -4,3 +4,4 @@
 /tmp
 tags
 start_server.sh
+*.env.sh
