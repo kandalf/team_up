@@ -9,7 +9,8 @@
   %body
     #wrap
       %header
-        = partial('shared/_nav_bar')
+        -if current_user
+          = partial('shared/_nav_bar')
       #content.container
         .row
           = show_flash_message
