@@ -6,7 +6,7 @@ body, #wrap { height: auto !important; }
 
 #wrap { min-height: 100%; margin: 0 auto -60px; }
 
-footer { height: 60px; background-color: #54574c; }
+footer { height: 60px; }
 
 #content { margin-bottom: 80px; }
 
@@ -25,3 +25,5 @@ label { font-weight: bold; color: #414141; }
 .standup ul.standup-elements li label { margin-left: 0; }
 
 ul.standups { list-style: none; }
+
+.panel-body ul { padding-left: 0; }

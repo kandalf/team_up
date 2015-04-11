@@ -1,11 +1,23 @@
-%h4 Standups for Today
-%ul.standups
-  - for_today.each do |standup|
-    %li.entry
-      = partial("standups/_standup", {:standup => standup}) 
+.panel.panel-default
+  .panel-heading
+    %h3
+      %a{ :href => "#today-standups", :'data-toggle' => :collapse, :'aria-expanded' => "true", :'aria-controls' => 'today-standups' }
+        Standups for Today
+  #today-standups.panel-collapse.collapse.in{ :role => "tabpanel" }
+    .panel-body
+      %ul.standups
+        - for_today.each do |standup|
+          %li.entry
+            = partial("standups/_standup", {:standup => standup})
 
-%h4 Previous Standups
-%ul.standups
-  - previous.each do |standup|
-    %li.entry
-      = partial("standups/_standup", {:standup => standup}) 
+.panel.panel-default
+  .panel-heading
+    %h3
+      %a.collapsed{ :href => "#previous-standups", :'data-toggle' => :collapse, :'aria-expanded' => "false", :'aria-controls' => 'today-standups' }
+        Previous Standups
+  #previous-standups.panel-collapse.collapse{ :role => "tabpanel" }
+    .panel-body
+      %ul.standups
+        - previous.each do |standup|
+          %li.entry
+            = partial("standups/_standup", {:standup => standup})
