@@ -3,12 +3,6 @@ TeamUp
 
 Agile standups tracking tool
 
-Allowed Organizations
-======= =============
+## License
 
-Users will be allowed to login only if belongs to the allowed organizations
-listed on the environment variable TEAM_UP_ORGS. Organizations should be
-separated by a whitespace.
-So for start the server use something like:
-
-TEAM_UP_ORGS="my_org another_org" shotgun
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
