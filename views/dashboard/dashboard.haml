@@ -4,13 +4,13 @@
     %form#new-standup{ :action => "/standups", :method => :post }
       %label{ :for => :'standup-prev' } Previous
       %textarea.span6#standup-previous{ :name => "standup[previous]", :readonly => !current_user.can_standup? }
-        = @my_standup.previous unless current_user.can_standup?
+        = my_standup.previous unless current_user.can_standup?
       %label{ :for => :'standup-next' } Next
       %textarea.span6#standup-next{ :name => "standup[next]", :readonly => !current_user.can_standup? }
-        = @my_standup.next unless current_user.can_standup?
+        = my_standup.next unless current_user.can_standup?
       %label{ :for => :'standup-blockers' } Blockers
       %textarea.span6#standup-blockers{ :name => "standup[blockers]", :readonly => !current_user.can_standup? }
-        = @my_standup.blockers unless current_user.can_standup?
+        = my_standup.blockers unless current_user.can_standup?
       %input{ :type => :hidden, :name => "standup[date]", :value => Date.today.to_s }
 
       .actions.span6
@@ -22,9 +22,9 @@
 
   #today-standups.span5
     %h4 Today Standups
-    - if @standups.empty?
+    - if standups.empty?
       #no-standups.alert.alert-block.alert-info.center
         %h4 There's no standups yet
     - else
-      - @standups.each do |standup|
+      - standups.each do |standup|
         = partial("standups/_standup", {:standup => standup})

@@ -18,7 +18,7 @@
 
       %ul.nav.navbar-nav.navbar-right
         %li
-          %a{ :href => "https://github.com/#{current_user.github_user}" }
+          %a{ :href => "https://github.com/#{current_user.github_user}", :target => "_blank" }
             = current_user.github_user
         %li
           %a.logout{ :href => "/logout" } Logout
