@@ -1,5 +1,7 @@
 module TeamUp
  class Standup < Cuba
+  settings[:render][:layout] = "layouts/application"
+
   define do
     on post, param("standup") do |params|
       standup = StandupCreator.new(params, self).execute
@@ -16,9 +18,7 @@ module TeamUp
         today_standups = ::Standup.for(Date.today)
         previous = ::Standup.last_ones
 
-        res.write render("./views/layouts/application.haml") {
-          render("views/standups/index.haml", {:for_today => today_standups, :previous => previous})
-        }
+        res.write render("standups/index", {:for_today => today_standups, :previous => previous})
       end
 
       on ":id/edit" do |id|

@@ -4,29 +4,25 @@ require 'cuba/flash'
 require 'rack/protection'
 require 'shield'
 require 'omniauth-github'
+require 'sequel'
 require_relative 'lib/team_up'
-require_relative 'helpers/environment'
+require_relative 'helpers/environment_helper'
 
-ENV['RACK_ENV'] ||= :development
-
-Cuba.settings[:sass] = {
-  :style => :compact,
-  :template_location => 'assets/stylesheets'
-}
+ENV['RACK_ENV'] ||= "development"
 
 Cuba.settings[:render]= {:template_engine => :haml}
 
-I18n.load_path += Dir['./locale/**/*.yml']
 Encoding.default_internal, Encoding.default_external = ['utf-8'] * 2
 
 TeamUp::Helpers.init_environment(ENV['RACK_ENV'])
 
 Cuba.use Rack::Static,
           root: File.expand_path(File.dirname(__FILE__)) + "/public",
-          urls: %w[/img /css /js]
+          urls: %w[/images /stylesheets /javascripts]
 
 Cuba.use Rack::Session::Cookie, :key => 'teamup.session', :secret => ENV["SESSION_SECRET"]
 Cuba.use Rack::Protection
+Cuba.use Rack::MethodOverride
 
 OmniAuth.config.on_failure = Proc.new { |env|
   OmniAuth::FailureEndpoint.new(env).redirect_to_failure
@@ -38,7 +34,7 @@ end
 
 Cuba.plugin Shield::Helpers
 Cuba.plugin Cuba::Render
-Cuba.plugin Cuba::Sass
+#Cuba.plugin Cuba::Sass
 Cuba.plugin TeamUp::Context
 
 include Cuba::Render::Helper
@@ -48,13 +44,15 @@ Dir["./models/**/*.rb"].each{ |f| require f }
 Dir["./contexts/**/*.rb"].each{ |f| require f }
 
 Cuba.define do
+  settings[:render][:layout] = "layouts/application"
+
   on root do
     if current_user
       res.redirect '/dashboard'
     else
-      res.write render("./views/layouts/application.haml") {
-        render("views/home/home.haml")
-      }
+      #res.write render("layouts/application") {
+        res.write view("home/home")
+      #}
     end
   end
 

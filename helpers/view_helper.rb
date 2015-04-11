@@ -1,3 +1,5 @@
+require 'cuba/render'
+
 class Cuba
   module Render::Helper
     def link_to(path, text, html_attrs = {})

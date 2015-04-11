@@ -1,21 +1,7 @@
-require "ohm"
-
-class User < Ohm::Model
+class User < Sequel::Model
   include Shield::Model
 
-  attribute :full_name
-  attribute :github_user
-  attribute :email
-  attribute :crypted_password
-  attribute :gravatar_url
-  attribute :organizations
-  collection :standups, :Standup
-
-  unique :github_user
-  unique :email
-
-  index :github_user
-  index :email
+  one_to_many :standups
 
   def initialize(attrs = {})
     super(attrs)
@@ -23,7 +9,7 @@ class User < Ohm::Model
   end
 
   def self.fetch(github_user)
-    with(:github_user, github_user)
+    find(:github_user => github_user)
   end
 
   def allowed?
@@ -38,6 +24,6 @@ class User < Ohm::Model
   end
 
   def today_standup
-    Standup.find(:user_id => self.id, :date => Date.today.to_s).first
+    Standup.find(:user_id => self.id, :date => Date.today.to_s)
   end
 end

@@ -1,7 +1,7 @@
 .standup
   .title.row
     .span3= standup.user.github_user
-    .span2= Date.parse(standup.date).to_s
+    .span2= Date.parse(standup.date.to_s).to_s
   %ul.standup-elements.row
     %li.span6
       %label.span1 Previous
