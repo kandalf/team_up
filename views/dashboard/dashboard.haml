@@ -32,8 +32,7 @@
     .panel-heading Today Standups
     .panel-body
       - if standups.empty?
-        #no-standups.alert.alert-block.alert-info.center
-          %h4 There's no standups yet
+        .well There are no standups yet
       - else
         - standups.each do |standup|
           = partial("standups/_standup", {:standup => standup})

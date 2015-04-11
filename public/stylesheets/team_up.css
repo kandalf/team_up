@@ -1,8 +1,8 @@
-html, body { height: 100%; }
+html { height: 100%; }
 
 a { outline: none; }
 
-body, #wrap { height: auto !important; }
+body, #wrap { min-height: 100%; height: auto !important; }
 
 #wrap { min-height: 100%; margin: 0 auto -60px; }
 

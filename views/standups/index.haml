@@ -5,10 +5,13 @@
         Standups for Today
   #today-standups.panel-collapse.collapse.in{ :role => "tabpanel" }
     .panel-body
-      %ul.standups
-        - for_today.each do |standup|
-          %li.entry
-            = partial("standups/_standup", {:standup => standup})
+      - if for_today.any?
+        %ul.standups
+          - for_today.each do |standup|
+            %li.entry
+              = partial("standups/_standup", {:standup => standup})
+      - else
+        .well There are no standups yet
 
 .panel.panel-default
   .panel-heading
@@ -17,7 +20,10 @@
         Previous Standups
   #previous-standups.panel-collapse.collapse{ :role => "tabpanel" }
     .panel-body
-      %ul.standups
-        - previous.each do |standup|
-          %li.entry
-            = partial("standups/_standup", {:standup => standup})
+      - if previous.any?
+        %ul.standups
+          - previous.each do |standup|
+            %li.entry
+              = partial("standups/_standup", {:standup => standup})
+      - else
+        .well There are no standups yet
