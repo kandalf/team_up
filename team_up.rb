@@ -1,13 +1,13 @@
 require 'cuba'
 require 'cuba/render'
+require 'cuba/flash'
 require 'rack/protection'
-require 'securerandom'
-require 'ohm'
 require 'shield'
 require 'omniauth-github'
-require './lib/team_up'
+require_relative 'lib/team_up'
+require_relative 'helpers/environment'
 
-Ohm.connect(:url => Settings::REDIS_URL)
+ENV['RACK_ENV'] ||= :development
 
 Cuba.settings[:sass] = {
   :style => :compact,
@@ -16,7 +16,16 @@ Cuba.settings[:sass] = {
 
 Cuba.settings[:render]= {:template_engine => :haml}
 
-Cuba.use Rack::Session::Cookie, :key => 'teamup.session', :secret => '570e9854e1c8cd4ec5238ac66a2f574abc3e4da6809f1fc26248f825a09c693b'
+I18n.load_path += Dir['./locale/**/*.yml']
+Encoding.default_internal, Encoding.default_external = ['utf-8'] * 2
+
+TeamUp::Helpers.init_environment(ENV['RACK_ENV'])
+
+Cuba.use Rack::Static,
+          root: File.expand_path(File.dirname(__FILE__)) + "/public",
+          urls: %w[/img /css /js]
+
+Cuba.use Rack::Session::Cookie, :key => 'teamup.session', :secret => ENV["SESSION_SECRET"]
 Cuba.use Rack::Protection
 
 OmniAuth.config.on_failure = Proc.new { |env|
