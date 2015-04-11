@@ -1,5 +1,4 @@
-module TeamUp
- class Standup < Cuba
+class StandupRoutes < Cuba
   settings[:render][:layout] = "layouts/application"
 
   define do
@@ -15,8 +14,8 @@ module TeamUp
 
     on get do
       on root do
-        today_standups = ::Standup.for(Date.today)
-        previous = ::Standup.last_ones
+        today_standups = Standup.for(Date.today)
+        previous = Standup.last_ones
 
         res.write view("standups/index", {:for_today => today_standups, :previous => previous})
       end
@@ -35,5 +34,4 @@ module TeamUp
       end
     end
   end
- end
 end

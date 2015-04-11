@@ -59,15 +59,15 @@ Cuba.define do
       res.redirect "/"
     end
     on "standups" do
-      run TeamUp::Standup
+      run StandupRoutes
     end
 
     on "dashboard" do
-      run TeamUp::Dashboard
+      run DashboardRoutes
     end
   end
 
   on "auth" do
-    run TeamUp::Session
+    run SessionRoutes
   end
 end
