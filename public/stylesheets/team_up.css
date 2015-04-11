@@ -1,20 +1,16 @@
-html { height: 100%; }
+html, body { height: 100%; }
 
-a { outline: none; }
-
-body, #wrap { min-height: 100%; height: auto !important; }
-
-#wrap { min-height: 100%; margin: 0 auto -60px; }
+a { outline: none none; }
 
 footer { height: 60px; }
 
-#content { margin-bottom: 80px; }
+#content { min-height: 90%; height: auto; margin-bottom: 4px; position: relative; }
 
 .actions { text-align: right; margin: 0; }
 
 .user a.logout { font-size: 0.7em; margin-left: 0.5em; }
 
-a.login { display: block; text-align: center; text-decoration: none; font-size: 1.5em; font-weight: bold; }
+a.login { display: block; text-align: center; text-decoration: none; }
 
 label { font-weight: bold; color: #414141; }
 

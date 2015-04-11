@@ -7,15 +7,15 @@
     %link{ :href => "/stylesheets/team_up.css", :rel => "stylesheet", :media => "screen" }
 
   %body
-    #wrap
-      %header
-        -if current_user
-          = partial('shared/_nav_bar')
-      #content.container
-        .row
-          = show_flash_message
-        .row
-          = content
+    %header
+      -if current_user
+        = partial('shared/_nav_bar')
+
+    #content.container
+      .row
+        = show_flash_message
+      .row
+        = content
 
     %footer.navbar-default
 
