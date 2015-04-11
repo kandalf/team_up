@@ -34,7 +34,6 @@ end
 
 Cuba.plugin Shield::Helpers
 Cuba.plugin Cuba::Render
-#Cuba.plugin Cuba::Sass
 Cuba.plugin TeamUp::Context
 
 include Cuba::Render::Helper
@@ -50,9 +49,7 @@ Cuba.define do
     if current_user
       res.redirect '/dashboard'
     else
-      #res.write render("layouts/application") {
-        res.write view("home/home")
-      #}
+      res.write view("home/home")
     end
   end
 
