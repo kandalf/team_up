@@ -1,30 +1,39 @@
-.row
-  #my-standup.span7
-    %h4== Standup for #{Date.today.to_s}
-    %form#new-standup{ :action => "/standups", :method => :post }
-      %label{ :for => :'standup-prev' } Previous
-      %textarea.span6#standup-previous{ :name => "standup[previous]", :readonly => !current_user.can_standup? }
-        = my_standup.previous unless current_user.can_standup?
-      %label{ :for => :'standup-next' } Next
-      %textarea.span6#standup-next{ :name => "standup[next]", :readonly => !current_user.can_standup? }
-        = my_standup.next unless current_user.can_standup?
-      %label{ :for => :'standup-blockers' } Blockers
-      %textarea.span6#standup-blockers{ :name => "standup[blockers]", :readonly => !current_user.can_standup? }
-        = my_standup.blockers unless current_user.can_standup?
-      %input{ :type => :hidden, :name => "standup[date]", :value => Date.today.to_s }
+.col-md-6
+  .panel.panel-default
+    .panel-heading== Standup for #{Date.today.to_s}
+    .panel-body
+      %form{ :action => "/standups", :method => :post }
+        %fieldset
+          .form-group
+            %label.control-label{ :for => :'standup-prev' } Previous
+            %textarea.form-control#standup-previous{ :name => "standup[previous]", :readonly => !current_user.can_standup? }
+              = my_standup.previous unless current_user.can_standup?
+          .form-group
+            %label.control-label{ :for => :'standup-next' } Next
+            %textarea.form-control#standup-next{ :name => "standup[next]", :readonly => !current_user.can_standup? }
+              = my_standup.next unless current_user.can_standup?
+          .form-group
+            %label.control-label{ :for => :'standup-blockers' } Blockers
+            %textarea.form-control#standup-blockers{ :name => "standup[blockers]", :readonly => !current_user.can_standup? }
+              = my_standup.blockers unless current_user.can_standup?
+            %input{ :type => :hidden, :name => "standup[date]", :value => Date.today.to_s }
 
-      .actions.span6
-        - if current_user.can_standup?
-          %input.btn.btn-success{ :type => :submit, :value => "Create" }
-        - else
-          .alert
-            %strong You've already added your standup today
+          .col-md-12
+            .pull-right
+              - if current_user.can_standup?
+                %input.btn.btn-success{ :type => :submit, :value => "Create" }
+              - else
+                .alert.pull-right
+                  %strong You've already added your standup today
+            .clearfix
 
-  #today-standups.span5
-    %h4 Today Standups
-    - if standups.empty?
-      #no-standups.alert.alert-block.alert-info.center
-        %h4 There's no standups yet
-    - else
-      - standups.each do |standup|
-        = partial("standups/_standup", {:standup => standup})
+.col-md-6
+  .panel.panel-info
+    .panel-heading Today Standups
+    .panel-body
+      - if standups.empty?
+        #no-standups.alert.alert-block.alert-info.center
+          %h4 There's no standups yet
+      - else
+        - standups.each do |standup|
+          = partial("standups/_standup", {:standup => standup})
