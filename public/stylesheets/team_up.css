@@ -27,3 +27,5 @@ label { font-weight: bold; color: #414141; }
 ul.standups { list-style: none; }
 
 .panel-body ul { padding-left: 0; }
+
+nav #avatar{ border-radius: 3px; margin-right: 5px; }
