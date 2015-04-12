@@ -1,9 +1,7 @@
-require 'pp'
 require 'json'
 
 class SessionManager
   def initialize(auth_hash, ctx)
-    pp auth_hash
     @ctx = ctx
     @info = auth_hash["info"]
     @uid = auth_hash["uid"]
